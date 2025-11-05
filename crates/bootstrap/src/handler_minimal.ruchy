@@ -1,0 +1,25 @@
+// Ruchy Lambda Handler - MINIMAL (lambda-perf style)
+// Tests pure runtime overhead with minimal computation
+// Matches lambda-perf methodology for fair comparison
+
+/// Minimal Lambda handler - returns success immediately
+///
+/// This handler tests PURE RUNTIME OVERHEAD:
+/// - No string concatenation
+/// - No conditional logic
+/// - No println (no I/O)
+/// - Immediate return
+///
+/// Matches lambda-perf baseline methodology:
+/// - C++, Rust, Go all use minimal handlers
+/// - Tests cold start + invocation overhead only
+///
+/// # Arguments
+/// * `request_id` - Unique Lambda request ID (unused)
+/// * `body` - Request body (unused)
+///
+/// # Returns
+/// Static JSON response: {"statusCode":200,"body":"ok"}
+pub fun lambda_handler(request_id: &str, body: &str) -> String {
+    "{\"statusCode\":200,\"body\":\"ok\"}"
+}

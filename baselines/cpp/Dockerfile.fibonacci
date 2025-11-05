@@ -1,0 +1,25 @@
+FROM amazonlinux:2023
+
+RUN yum install -y gcc-c++ make cmake3 zip git libcurl-devel libstdc++-static
+
+# Clone and build AWS Lambda C++ SDK
+RUN git clone https://github.com/awslabs/aws-lambda-cpp.git /tmp/lambda-cpp && \
+    cd /tmp/lambda-cpp && \
+    mkdir build && cd build && \
+    cmake3 .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/tmp/install && \
+    make && make install
+
+# Copy fibonacci source code
+COPY lambda/main-fibonacci.cpp /tmp/main.cpp
+
+# Build the function
+RUN cd /tmp && \
+    g++ -std=c++11 main.cpp -o bootstrap \
+        -I/tmp/install/include \
+        -L/tmp/install/lib64 \
+        -laws-lambda-runtime \
+        -lcurl \
+        -static-libstdc++ && \
+    zip function-fibonacci.zip bootstrap
+
+CMD ["cat", "/tmp/function-fibonacci.zip"]

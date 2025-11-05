@@ -1,0 +1,5 @@
+# Clippy configuration for Ruchy Lambda
+# Exclude generated files from linting
+
+# Note: Clippy doesn't support file-level excludes directly
+# Generated files should use #[allow(clippy::all)] attributes

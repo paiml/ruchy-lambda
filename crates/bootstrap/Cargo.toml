@@ -1,0 +1,38 @@
+[package]
+name = "ruchy-lambda-bootstrap"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "AWS Lambda custom runtime bootstrap for Ruchy (world's fastest Lambda runtime)"
+keywords = ["lambda", "serverless", "ruchy", "performance", "aws"]
+categories = ["web-programming", "asynchronous"]
+readme = "../../README.md"
+
+[[bin]]
+name = "bootstrap"
+path = "src/main.rs"
+
+[dependencies]
+# Phase 3: Removed tokio (replaced with blocking I/O)
+# tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+
+# Runtime crate (our custom lightweight runtime implementation)
+# No longer depends on heavy lambda_runtime - using minimal HTTP client instead
+ruchy-lambda-runtime = { path = "../runtime" }
+
+[dev-dependencies]
+proptest = { workspace = true }
+criterion = { workspace = true }
+# Phase 3: tokio only for tests (mock server), NOT in production binary
+tokio = { version = "1.40", features = ["full"] }
+
+[build-dependencies]
+# Future: Will add ruchy transpiler integration here
+
+[[bench]]
+name = "cold_start"
+harness = false

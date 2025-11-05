@@ -1,0 +1,26 @@
+🔍 Running quality gate checks...
+
+📋 Checks to run:
+  ✓ Complexity analysis
+  ✓ Dead code detection
+  ✓ Self-admitted technical debt (SATD)
+  ✓ Security vulnerabilities
+  ✓ Code entropy
+  ✓ Duplicate code
+  ✓ Test coverage
+
+  🔍 Checking complexity... 0 violations found
+  🔍 Checking dead code...🎯 Dead code analysis: scanning 4 Rust source files (max 100)
+ 0 violations found
+  🔍 Checking technical debt... 0 violations found
+  🔍 Checking code entropy... 1 violations found
+  🔍 Checking security... 0 violations found
+  🔍 Checking duplicates... 0 violations found
+  🔍 Checking test coverage... 0 violations found
+  🔍 Checking documentation sections... 4 violations found
+  🔍 Checking provability... 1 violations found
+Quality Gate: FAILED
+Total violations: 6
+
+
+⚠️ Quality gate found 6 violations

@@ -1,0 +1,9 @@
+Found 6 mutants to test
+ok       Unmutated baseline in 10.5s build + 0.3s test
+MISSED   crates/runtime/src/lib.rs:51:9: replace <impl fmt::Display for Error>::fmt -> fmt::Result with Ok(Default::default()) in 0.4s build + 0.3s test
+MISSED   crates/runtime/src/lib.rs:87:9: replace <impl fmt::Debug for Runtime>::fmt -> fmt::Result with Ok(Default::default()) in 0.5s build + 0.3s test
+MISSED   crates/runtime/src/lib.rs:144:9: replace Runtime::get_client -> Result<&reqwest::Client> with Ok(Box::leak(Box::new(Default::default()))) in 0.5s build + 0.3s test
+MISSED   crates/runtime/src/lib.rs:181:9: replace Runtime::next_event -> Result<String> with Ok(String::new()) in 0.5s build + 0.3s test
+MISSED   crates/runtime/src/lib.rs:181:9: replace Runtime::next_event -> Result<String> with Ok("xyzzy".into()) in 0.4s build + 0.3s test
+MISSED   crates/runtime/src/lib.rs:222:9: replace Runtime::post_response -> Result<()> with Ok(()) in 0.4s build + 0.3s test
+6 mutants tested in 15s: 6 missed

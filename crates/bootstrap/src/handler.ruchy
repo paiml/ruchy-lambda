@@ -1,0 +1,39 @@
+// Ruchy Lambda Handler
+// Real production handler transpiled from Ruchy to Rust
+// Performance target: <100μs invocation overhead
+
+/// Process Lambda event and return response
+///
+/// This handler demonstrates the core Lambda processing pattern:
+/// - Receives event metadata (request_id, body)
+/// - Processes the request
+/// - Returns properly formatted Lambda response
+///
+/// # Arguments
+/// * `request_id` - Unique Lambda request ID
+/// * `body` - Request body (JSON string)
+///
+/// # Returns
+/// JSON response with statusCode and body
+pub fun lambda_handler(request_id: &str, body: &str) -> String {
+    // Log request for debugging
+    println("Processing Lambda request: {}", request_id);
+
+    // Process request body
+    let message = if body.is_empty() {
+        "Hello from Ruchy Lambda! (no body)"
+    } else {
+        "Hello from Ruchy Lambda!"
+    };
+
+    // Build Lambda response (JSON format required by Lambda Runtime API)
+    // Must include statusCode and body fields
+    // Note: Using string concatenation since format! macro not yet supported in Ruchy
+    let response_body = String::from(message) + ". Request ID: " + request_id;
+    let response = String::from("{\"statusCode\":200,\"body\":\"") + &response_body + "\"}";
+
+    response
+}
+
+// Note: No main() function needed - this is a module used by bootstrap binary
+// For local testing, use: cargo test -p ruchy-lambda-bootstrap

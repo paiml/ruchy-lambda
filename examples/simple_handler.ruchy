@@ -1,0 +1,10 @@
+// Simple Ruchy Lambda Handler
+// Minimal test to verify transpilation works
+
+fun handler(request_id: &str) -> &str {
+    println("Processing request: {}", request_id);
+    "Hello from Ruchy Lambda!"
+}
+
+// Example: Run with `rustc simple_handler_generated.rs && ./simple_handler_generated`
+// Or transpile manually: `cargo run --bin ruchy -- transpile simple_handler.ruchy`

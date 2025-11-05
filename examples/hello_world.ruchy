@@ -1,0 +1,28 @@
+// Ruchy Lambda Handler: Hello World
+// This is example Ruchy code that will be transpiled to Rust
+//
+// Ruchy is a Ruby-like language that transpiles to Rust for maximum performance
+// Target: <8ms cold start, <100μs invocation overhead
+
+fn main() {
+    // Lambda handler function
+    // Input: Lambda event (JSON)
+    // Output: Lambda response (JSON with statusCode and body)
+    fn handler(event) {
+        // Extract request context
+        let request_id = event.requestContext.requestId
+
+        // Simple string interpolation
+        let message = f"Hello from Ruchy Lambda! Request ID: {request_id}"
+
+        // Return Lambda response
+        {
+            statusCode: 200,
+            body: message
+        }
+    }
+
+    // Entry point for Lambda runtime
+    // The transpiler will generate the proper integration with our Runtime
+    println("Hello World Lambda Handler initialized")
+}

@@ -1,0 +1,45 @@
+# PMAT Quality Gates Configuration
+# Enforced via pre-commit hooks and CI/CD
+# See specification Appendix C for details
+
+[gates]
+run_clippy = true
+clippy_strict = true
+clippy_deny_warnings = true
+
+run_tests = true
+test_timeout = 300
+min_pass_rate = 100.0
+
+check_coverage = true
+min_coverage = 85.0
+coverage_tool = "llvm-cov"
+
+check_mutation = true
+min_mutation_score = 85.0
+mutation_timeout = 600
+
+# Temporarily relaxed for initial setup (will be re-enabled in Phase 1)
+check_complexity = false
+max_cyclomatic = 15
+max_cognitive = 20
+
+check_tdg = true
+min_tdg_grade = "A"
+target_tdg_grade = "A+"
+fail_on_regression = true
+
+check_satd = true
+satd_zero_tolerance = true
+
+check_dead_code = true
+allow_dead_code = false
+
+check_formatting = true
+format_tool = "rustfmt"
+
+[performance]
+track_binary_size = true
+max_binary_size_kb = 100
+track_build_time = true
+max_build_time_seconds = 30

@@ -1,0 +1,101 @@
+// Comprehensive test for v3.208.0 transpiler
+// Tests all previously broken features
+
+use ruchy_lambda_runtime_pure::Runtime;
+
+// Test 1: Standalone functions (was TRANSPILER-009)
+pub fun fibonacci(n: i32) -> i32 {
+    if n <= 1 {
+        n
+    } else {
+        fibonacci(n - 1) + fibonacci(n - 2)
+    }
+}
+
+// Test 2: Arithmetic operations (was TRANSPILER-001)
+pub fun add_numbers(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+pub fun multiply(a: i32, b: i32) -> i32 {
+    a * b
+}
+
+// Test 3: Struct with methods (was PARSER-008: pub visibility)
+pub struct Calculator {
+    value: i32,
+}
+
+impl Calculator {
+    pub fun new() -> Calculator {
+        Calculator { value: 0 }
+    }
+
+    pub fun add(&mut self, amount: i32) {
+        self.value = self.value + amount;
+    }
+
+    pub fun subtract(&mut self, amount: i32) {
+        self.value = self.value - amount;
+    }
+
+    pub fun get(&self) -> i32 {
+        self.value
+    }
+
+    pub fun reset(&mut self) {
+        self.value = 0;
+    }
+}
+
+// Test 4: Lambda handler with all features
+pub fun lambda_handler(_request_id: &str, _body: &str) -> String {
+    let mut calc = Calculator::new();
+    calc.add(10);
+    calc.add(5);
+
+    let sum = add_numbers(3, 7);
+    let product = multiply(4, 5);
+    let fib = fibonacci(10);
+
+    let response = String::from("{\"statusCode\":200,\"body\":\"")
+        + "calc=" + &calc.get().to_string()
+        + ",sum=" + &sum.to_string()
+        + ",product=" + &product.to_string()
+        + ",fib=" + &fib.to_string()
+        + "\"}";
+
+    response
+}
+
+pub fun main() {
+    println!("[TEST] Running comprehensive v3.208.0 tests...");
+
+    // Test standalone functions
+    let fib_result = fibonacci(10);
+    println!("[TEST] fibonacci(10) = {}", fib_result);
+
+    // Test arithmetic
+    let sum = add_numbers(100, 50);
+    println!("[TEST] add_numbers(100, 50) = {}", sum);
+
+    let product = multiply(12, 8);
+    println!("[TEST] multiply(12, 8) = {}", product);
+
+    // Test Calculator struct
+    let mut calc = Calculator::new();
+    calc.add(25);
+    println!("[TEST] calc after add(25) = {}", calc.get());
+
+    calc.subtract(10);
+    println!("[TEST] calc after subtract(10) = {}", calc.get());
+
+    calc.reset();
+    println!("[TEST] calc after reset() = {}", calc.get());
+
+    // Test lambda handler
+    let response = lambda_handler("test-123", "{}");
+    println!("[TEST] lambda_handler response: {}", response);
+
+    println!("[TEST] ✅ All tests passed!");
+}

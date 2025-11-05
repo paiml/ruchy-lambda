@@ -1,0 +1,84 @@
+# Detailed PMAT Quality Standards
+# Zero tolerance for defects - Toyota Way principles
+# See specification Section 7 for complete documentation
+
+[complexity]
+cyclomatic_threshold = 15
+cyclomatic_stretch_goal = 10
+cognitive_threshold = 20
+cognitive_stretch_goal = 15
+max_nesting_depth = 5
+max_function_lines = 100
+max_file_lines = 500
+
+[entropy]
+enabled = true
+min_pattern_occurrences = 15
+min_entropy_threshold = 0.7
+ignore_test_files = true
+ignore_generated_files = true
+
+[satd]
+enabled = true
+zero_tolerance = true
+patterns = ["TODO", "FIXME", "HACK", "XXX", "KLUDGE", "WORKAROUND", "BUG", "NOTE"]
+allowed_in_tests = false
+allowed_in_docs = false
+
+[dead_code]
+enabled = true
+fail_on_detection = true
+ignore_test_helpers = false
+ignore_examples = false
+
+[tdg]
+min_grade = "A"
+target_grade = "A+"
+track_historical = true
+baseline_file = ".pmat/tdg-baseline.json"
+git_integration = true
+
+# Component-specific thresholds (Section 7.4)
+[tdg.components]
+bootstrap = { min_grade = "A+", critical = true }
+runtime = { min_grade = "A", critical = true }
+handlers = { min_grade = "A", critical = false }
+tests = { min_grade = "B+", critical = false }
+
+[mutation]
+enabled = true
+min_score = 85.0
+target_score = 90.0
+critical_code_min_score = 95.0
+critical_paths = ["crates/bootstrap/src/main.rs", "crates/runtime/src/"]
+timeout_per_mutation = 10
+parallel_execution = true
+max_workers = 4
+
+# Mutation operators
+[mutation.operators]
+arithmetic = true       # +, -, *, /
+comparison = true       # ==, !=, <, <=, >, >=
+logical = true         # &&, ||, !
+boundary = true        # <, <=, >, >=
+return_values = true   # return x -> return !x
+
+[quality_gate]
+fail_on_any_violation = true
+aggregate_scoring = true
+require_all_checks = true
+stop_on_first_failure = false
+
+[documentation]
+validate_readme = true
+validate_architecture = true
+validate_api_docs = true
+detect_hallucinations = true
+require_examples = true
+min_doc_coverage = 80.0
+
+[performance_requirements]
+max_cold_start_ms = 10
+max_binary_size_kb = 100
+max_memory_mb = 64
+min_ruchy_performance_vs_python = 10.0  # 10x faster than Python

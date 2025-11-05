@@ -1,0 +1,16 @@
+{
+  "binary_size_kb": 316,
+  "cold_start_ms": {
+    "avg": 2,
+    "min": 2,
+    "max": 3,
+    "iterations": 10
+  },
+  "comparison": {
+    "cpp_baseline": "13.54",
+    "rust_baseline": "16.98",
+    "go_baseline": "45.77"
+  },
+  "target_ms": "8.0",
+  "target_met": true
+}

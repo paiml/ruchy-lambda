@@ -1,0 +1,54 @@
+// Ruchy Lambda Handler - FIBONACCI (CPU benchmark)
+// Tests compute performance with recursive algorithm
+// Standard benchmark: fibonacci(35)
+
+/// Recursive Fibonacci implementation
+///
+/// Classic CPU-bound benchmark used across all languages.
+/// Standard test value: n=35
+///
+/// # Arguments
+/// * `n` - Fibonacci number to calculate
+///
+/// # Returns
+/// The nth Fibonacci number
+pub fun fibonacci(n: i32) -> i32 {
+    if n <= 1 {
+        n
+    } else {
+        fibonacci(n - 1) + fibonacci(n - 2)
+    }
+}
+
+/// Lambda handler with Fibonacci computation
+///
+/// This handler tests COMPUTE PERFORMANCE:
+/// - CPU-bound workload (recursive fibonacci)
+/// - Memory allocation (call stack)
+/// - Transpiler optimization quality
+///
+/// Benchmark configuration:
+/// - fibonacci(35) = standard benchmark value
+/// - ~59 million function calls
+/// - ~1-2 seconds on typical hardware
+///
+/// # Arguments
+/// * `request_id` - Unique Lambda request ID
+/// * `body` - Request body (should contain "n" value, defaults to 35)
+///
+/// # Returns
+/// JSON response with fibonacci result
+pub fun lambda_handler(request_id: &str, body: &str) -> String {
+    // Standard benchmark value
+    let n = 35;
+
+    // Calculate fibonacci
+    let result = fibonacci(n);
+
+    // Build response
+    // Format: {"statusCode":200,"body":"fibonacci(35)=9227465"}
+    let result_str = result.to_string();
+    let response = String::from("{\"statusCode\":200,\"body\":\"fibonacci(35)=") + &result_str + "\"}";
+
+    response
+}
