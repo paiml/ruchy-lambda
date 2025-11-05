@@ -1,0 +1,56 @@
+// Pure Ruchy Lambda Runtime
+// Hybrid approach: Ruchy API + Rust HTTP implementation
+//
+// This demonstrates Ruchy calling Rust code for complex operations!
+// Runtime API written in Ruchy, HTTP client in Rust (injected by build.rs).
+
+/// Lambda Runtime - Core runtime for AWS Lambda Custom Runtime API
+///
+/// Implements blocking HTTP client for:
+/// - GET /2018-06-01/runtime/invocation/next (long-poll)
+/// - POST /2018-06-01/runtime/invocation/{id}/response
+pub struct Runtime {
+    api_endpoint: String,
+}
+
+impl Runtime {
+    /// Create new Runtime from default endpoint
+    pub fun new() -> Runtime {
+        let endpoint = String::from("127.0.0.1:9001");
+        Runtime {
+            api_endpoint: endpoint,
+        }
+    }
+
+    /// Get next Lambda event (blocking long-poll)
+    ///
+    /// Returns tuple of (request_id, event_body)
+    pub fun next_event(&self) -> (String, String) {
+        let path = String::from("/2018-06-01/runtime/invocation/next");
+        let result = http_client::http_get(&self.api_endpoint, &path);
+
+        if result.is_ok() {
+            result.unwrap()
+        } else {
+            let error_id = String::from("error");
+            let error_body = String::from("{}");
+            (error_id, error_body)
+        }
+    }
+
+    /// Post response back to Lambda Runtime API
+    ///
+    /// # Arguments
+    /// * `request_id` - Request ID from next_event()
+    /// * `response_body` - JSON response body
+    pub fun post_response(&self, request_id: &str, response_body: &str) -> bool {
+        let path = String::from("/2018-06-01/runtime/invocation/") + request_id + "/response";
+        let result = http_client::http_post(&self.api_endpoint, &path, response_body);
+        result.is_ok()
+    }
+
+    /// Get the API endpoint
+    pub fun endpoint(&self) -> String {
+        self.api_endpoint.clone()
+    }
+}

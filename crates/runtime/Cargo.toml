@@ -1,0 +1,34 @@
+[package]
+name = "ruchy-lambda-runtime"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "High-performance AWS Lambda runtime library for Ruchy (<8ms cold start target)"
+keywords = ["lambda", "serverless", "runtime", "performance", "zero-copy"]
+categories = ["web-programming", "asynchronous"]
+readme = "../../README.md"
+
+[lib]
+name = "ruchy_lambda_runtime"
+path = "src/lib.rs"
+
+[dependencies]
+# Phase 3: Removed tokio (replaced with blocking I/O)
+# tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+static_assertions = "1.1"
+once_cell = "1.20"
+
+[dev-dependencies]
+proptest = { workspace = true }
+criterion = { workspace = true }
+serial_test = "3.1"
+# Phase 3: tokio only for tests (mock server), NOT in production binary
+tokio = { version = "1.40", features = ["full"] }
+
+[[bench]]
+name = "deserialization"
+harness = false

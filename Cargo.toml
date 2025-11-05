@@ -1,0 +1,62 @@
+[workspace]
+members = [
+    "crates/bootstrap",
+    "crates/runtime",
+    "crates/profiler", "crates/runtime-pure",
+]
+resolver = "2"
+
+[workspace.package]
+version = "3.209.0"
+edition = "2021"
+authors = ["Ruchy Lambda Contributors"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/paiml/ruchy-lambda"
+
+[workspace.dependencies]
+# Minimal dependencies for Lambda runtime
+# Phase 3: Removed tokio (replaced with blocking I/O, saves ~77KB)
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+lambda_runtime = { version = "0.13", default-features = false }
+
+# Development dependencies
+proptest = "1.5"
+criterion = "0.5"
+
+[profile.dev]
+opt-level = 0
+debug = true
+split-debuginfo = "unpacked"
+
+[profile.test]
+opt-level = 1
+debug = true
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 16
+strip = false
+debug = false
+
+# Ultra-optimized profile for Lambda deployment
+# Target: <100KB binary, <8ms cold start
+[profile.release-ultra]
+inherits = "release"
+opt-level = 'z'           # Optimize for size (reduces cold start)
+lto = "fat"               # Fat link-time optimization
+codegen-units = 1         # Maximum optimization, single compilation unit
+panic = 'abort'           # No unwinding overhead
+strip = true              # Remove debug symbols
+incremental = false       # Disable incremental for maximum optimization
+overflow-checks = false   # No overflow checks in production
+
+# PGO (Profile-Guided Optimization) profiles
+# See specification Section 2.2 for details
+[profile.release-pgo-generate]
+inherits = "release-ultra"
+strip = false
+
+[profile.release-pgo-use]
+inherits = "release-ultra"

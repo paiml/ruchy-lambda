@@ -1,0 +1,196 @@
+{
+  "benchmark": "fibonacci-35",
+  "name": "Fibonacci recursive (n=35)",
+  "description": "Local performance comparison - matches AWS Lambda fibonacci(35) test",
+  "tool": "bashrs bench v6.25.0",
+  "modes": {
+    "c": 
+{
+  "name": "Fibonacci recursive (n=35)",
+  "mode": "c",
+  "iterations": 10,
+  "warmup": 3,
+  "mean_ms": 13.35,
+  "median_ms": 12.59,
+  "stddev_ms": 2.00,
+  "min_ms": 12.08,
+  "max_ms": 19.17,
+  "raw_results": [19,13,12,14,12,12,13,12,12,13],
+  "memory": {
+    "peak_kb": 0,
+    "mean_kb": 0,
+    "peak_mb": 0.00,
+    "mean_mb": 0.00
+  },
+  "environment": {
+    "cpu": "AMD Ryzen Threadripper 7960X 24-Cores",
+    "ram": "125Gi",
+    "os": "Linux 6.8.0-85-generic",
+    "timestamp": "2025-11-05T14:48:03+01:00"
+  },
+  "tool": "bashrs bench v6.25.0"
+}
+,
+    "rust": 
+{
+  "name": "Fibonacci recursive (n=35)",
+  "mode": "rust",
+  "iterations": 10,
+  "warmup": 3,
+  "mean_ms": 24.27,
+  "median_ms": 24.33,
+  "stddev_ms": 0.70,
+  "min_ms": 23.19,
+  "max_ms": 25.60,
+  "raw_results": [24,24,23,24,24,24,23,26,25,25],
+  "memory": {
+    "peak_kb": 0,
+    "mean_kb": 0,
+    "peak_mb": 0.00,
+    "mean_mb": 0.00
+  },
+  "environment": {
+    "cpu": "AMD Ryzen Threadripper 7960X 24-Cores",
+    "ram": "125Gi",
+    "os": "Linux 6.8.0-85-generic",
+    "timestamp": "2025-11-05T14:48:03+01:00"
+  },
+  "tool": "bashrs bench v6.25.0"
+}
+,
+    "go": 
+{
+  "name": "Fibonacci recursive (n=35)",
+  "mode": "go",
+  "iterations": 10,
+  "warmup": 3,
+  "mean_ms": 37.85,
+  "median_ms": 38.04,
+  "stddev_ms": 1.00,
+  "min_ms": 36.37,
+  "max_ms": 39.27,
+  "raw_results": [38,36,36,37,38,38,39,39,39,37],
+  "memory": {
+    "peak_kb": 0,
+    "mean_kb": 0,
+    "peak_mb": 0.00,
+    "mean_mb": 0.00
+  },
+  "environment": {
+    "cpu": "AMD Ryzen Threadripper 7960X 24-Cores",
+    "ram": "125Gi",
+    "os": "Linux 6.8.0-85-generic",
+    "timestamp": "2025-11-05T14:48:03+01:00"
+  },
+  "tool": "bashrs bench v6.25.0"
+}
+,
+    "python": 
+{
+  "name": "Fibonacci recursive (n=35)",
+  "mode": "python",
+  "iterations": 10,
+  "warmup": 3,
+  "mean_ms": 672.65,
+  "median_ms": 669.70,
+  "stddev_ms": 7.91,
+  "min_ms": 662.63,
+  "max_ms": 689.30,
+  "raw_results": [675,667,674,684,669,689,663,670,665,670],
+  "memory": {
+    "peak_kb": 0,
+    "mean_kb": 0,
+    "peak_mb": 0.00,
+    "mean_mb": 0.00
+  },
+  "environment": {
+    "cpu": "AMD Ryzen Threadripper 7960X 24-Cores",
+    "ram": "125Gi",
+    "os": "Linux 6.8.0-85-generic",
+    "timestamp": "2025-11-05T14:48:03+01:00"
+  },
+  "tool": "bashrs bench v6.25.0"
+}
+,
+    "ruchy-transpiled": 
+{
+  "name": "Fibonacci recursive (n=35)",
+  "mode": "ruchy-transpile",
+  "iterations": 10,
+  "warmup": 3,
+  "mean_ms": 23.72,
+  "median_ms": 23.61,
+  "stddev_ms": 0.44,
+  "min_ms": 23.02,
+  "max_ms": 24.46,
+  "raw_results": [23,24,24,23,24,24,24,24,23,23],
+  "memory": {
+    "peak_kb": 0,
+    "mean_kb": 0,
+    "peak_mb": 0.00,
+    "mean_mb": 0.00
+  },
+  "environment": {
+    "cpu": "AMD Ryzen Threadripper 7960X 24-Cores",
+    "ram": "125Gi",
+    "os": "Linux 6.8.0-85-generic",
+    "timestamp": "2025-11-05T14:48:03+01:00"
+  },
+  "tool": "bashrs bench v6.25.0"
+}
+,
+    "ruchy-compiled": 
+{
+  "name": "Fibonacci recursive (n=35)",
+  "mode": "ruchy-compile",
+  "iterations": 10,
+  "warmup": 3,
+  "mean_ms": 23.91,
+  "median_ms": 23.93,
+  "stddev_ms": 0.67,
+  "min_ms": 23.03,
+  "max_ms": 25.39,
+  "raw_results": [25,24,24,24,24,23,24,23,24,23],
+  "memory": {
+    "peak_kb": 0,
+    "mean_kb": 0,
+    "peak_mb": 0.00,
+    "mean_mb": 0.00
+  },
+  "environment": {
+    "cpu": "AMD Ryzen Threadripper 7960X 24-Cores",
+    "ram": "125Gi",
+    "os": "Linux 6.8.0-85-generic",
+    "timestamp": "2025-11-05T14:48:03+01:00"
+  },
+  "tool": "bashrs bench v6.25.0"
+}
+,
+    "julia": 
+{
+  "name": "Fibonacci recursive (n=35)",
+  "mode": "julia",
+  "iterations": 10,
+  "warmup": 3,
+  "mean_ms": 185.64,
+  "median_ms": 187.30,
+  "stddev_ms": 4.25,
+  "min_ms": 177.93,
+  "max_ms": 191.09,
+  "raw_results": [191,187,190,187,178,180,188,187,181,186],
+  "memory": {
+    "peak_kb": 0,
+    "mean_kb": 0,
+    "peak_mb": 0.00,
+    "mean_mb": 0.00
+  },
+  "environment": {
+    "cpu": "AMD Ryzen Threadripper 7960X 24-Cores",
+    "ram": "125Gi",
+    "os": "Linux 6.8.0-85-generic",
+    "timestamp": "2025-11-05T14:48:03+01:00"
+  },
+  "tool": "bashrs bench v6.25.0"
+}
+  }
+}

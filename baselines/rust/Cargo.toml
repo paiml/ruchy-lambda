@@ -1,0 +1,26 @@
+[package]
+name = "lambda-perf"
+version = "1.0.0"
+edition = "2021"
+
+[workspace]
+
+[[bin]]
+name = "lambda-perf"
+path = "src/main.rs"
+
+[[bin]]
+name = "lambda-perf-fibonacci"
+path = "src/main-fibonacci.rs"
+
+[dependencies]
+lambda_runtime = "0.14.4"
+tokio = { version = "1", features = ["macros"] }
+serde_json = "1.0.145"
+
+[profile.release]
+opt-level = 'z'
+lto = true
+codegen-units = 1
+panic = 'abort'
+strip = true

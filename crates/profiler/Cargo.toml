@@ -1,0 +1,36 @@
+[package]
+name = "ruchy-lambda-profiler"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Performance profiler for Ruchy Lambda runtime - measure cold start times, compare against C++/Rust/Go"
+keywords = ["lambda", "profiler", "performance", "benchmark", "ruchy"]
+categories = ["development-tools::profiling", "development-tools::testing"]
+readme = "../../README.md"
+
+[lib]
+name = "ruchy_lambda_profiler"
+path = "src/lib.rs"
+
+[[bin]]
+name = "profiler"
+path = "src/main.rs"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+clap = { version = "4.0", features = ["derive"] }
+
+# AWS SDK for real Lambda invocation (GREEN phase)
+aws-config = "1.0"
+aws-sdk-lambda = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+
+# jemalloc for real memory profiling (GREEN phase)
+jemallocator = "0.5"
+jemalloc-ctl = "0.5"
+
+[dev-dependencies]
+tempfile = "3.0"

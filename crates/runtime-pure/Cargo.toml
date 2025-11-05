@@ -1,0 +1,22 @@
+[package]
+name = "ruchy-lambda-runtime-pure"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Pure Ruchy Lambda Runtime - Runtime implementation written in Ruchy (transpiled to Rust)"
+keywords = ["lambda", "ruchy", "runtime", "serverless", "aws"]
+categories = ["development-tools", "web-programming"]
+
+[lib]
+name = "ruchy_lambda_runtime_pure"
+path = "src/lib_generated.rs"
+
+[dependencies]
+once_cell = "1.21"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+static_assertions = "1.1"
+
+[build-dependencies]

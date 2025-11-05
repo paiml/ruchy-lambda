@@ -1,0 +1,54 @@
+// Ruchy Lambda Handler: Fibonacci Calculator
+// Demonstrates: recursion, control flow, type conversions
+// Target: <8ms cold start, <100μs invocation overhead
+
+fn main() {
+    // Recursive fibonacci function
+    fn fibonacci(n) {
+        if n == 0 {
+            0
+        } else if n == 1 {
+            1
+        } else {
+            fibonacci(n - 1) + fibonacci(n - 2)
+        }
+    }
+
+    // Lambda handler function
+    fn handler(event) {
+        // Parse input from request body
+        let body = event.body
+        let n = body.n
+
+        // Validate input
+        if n < 0 {
+            return {
+                statusCode: 400,
+                body: "Error: n must be non-negative"
+            }
+        }
+
+        if n > 30 {
+            return {
+                statusCode: 400,
+                body: "Error: n must be ≤ 30 (performance limit)"
+            }
+        }
+
+        // Calculate fibonacci
+        let result = fibonacci(n)
+
+        // Return success response
+        {
+            statusCode: 200,
+            body: {
+                n: n,
+                fibonacci: result,
+                message: f"Calculated fibonacci({n}) = {result}"
+            }
+        }
+    }
+
+    // Entry point for Lambda runtime
+    println("Fibonacci Lambda Handler initialized")
+}
