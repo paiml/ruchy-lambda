@@ -370,6 +370,7 @@ From PMAT analysis:
 - [VERIFICATION_REPORT.md](VERIFICATION_REPORT.md) - Ruchy vs Rust composition analysis
 - [baselines/README.md](baselines/README.md) - Baseline implementation details
 - [benchmarks/local-fibonacci/README.md](benchmarks/local-fibonacci/README.md) - Local benchmark guide
+- [Docker runtime](https://github.com/paiml/ruchy-docker?tab=readme-ov-file) - Another repo dedicated to showing Docker runtime sizes
 
 ## Dependencies
 
