@@ -185,6 +185,47 @@ ruchy compile file.ruchy --optimize nasa --verbose  # Show all flags
 
 **Recommendation**: Use `--optimize aggressive` for Lambda deployments (91.8% size reduction).
 
+### PERF-002: Profile Information and PGO (v3.211.0+)
+
+**Show Profile Characteristics** (`--show-profile-info`):
+```bash
+ruchy compile file.ruchy --optimize nasa --show-profile-info
+```
+
+Displays before compilation:
+- Optimization level and LTO settings
+- Expected speedup and binary size estimates
+- Compile time estimates (~30-60s for 1000 LOC)
+- Alternative profile suggestions
+
+**Profile-Guided Optimization** (`--pgo`):
+```bash
+ruchy compile file.ruchy -o myapp --pgo
+```
+
+Two-step PGO process for **25-50× speedup** on CPU-intensive workloads:
+1. Builds profiled binary (`myapp-profiled`)
+2. Prompts to run typical workload (e.g., `./myapp-profiled test-input.json`)
+3. Builds optimized binary with profile data (`-C target-cpu=native`)
+
+**PGO Benefits for Lambda**:
+- Optimized for actual usage patterns (not synthetic benchmarks)
+- Native CPU instruction set targeting
+- Profile data reusable across builds
+- **Best for compute-heavy Lambda functions** (fibonacci, image processing, etc.)
+
+**Example for Lambda handler**:
+```bash
+# Step 1: Build with PGO
+ruchy compile handler_fibonacci.ruchy -o bootstrap --pgo
+
+# Step 2: Run typical workload during prompt
+./bootstrap-profiled <<< '{"n": 35}'
+
+# Step 3: Final optimized binary built automatically
+# Result: bootstrap (PGO-optimized for fibonacci workload)
+```
+
 ### Cargo Release Profiles
 
 #### Production Profile: `release-ultra`

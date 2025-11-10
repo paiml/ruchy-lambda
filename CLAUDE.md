@@ -189,6 +189,21 @@ cargo build --profile release-ultra --target aarch64-unknown-linux-musl
 ls -lh target/aarch64-unknown-linux-musl/release-ultra/bootstrap
 ```
 
+**PERF-002 Features** (Ruchy v3.211.0+):
+```bash
+# Show profile characteristics before compilation
+ruchy compile handler_fibonacci.ruchy --optimize nasa --show-profile-info
+
+# Profile-Guided Optimization (25-50× speedup for CPU-intensive Lambda functions)
+ruchy compile handler_fibonacci.ruchy -o bootstrap --pgo
+# → Builds profiled binary, prompts for workload, builds optimized binary
+
+# PGO Benefits for Lambda:
+# - Optimized for actual usage patterns (not synthetic benchmarks)
+# - Native CPU instruction targeting (-C target-cpu=native)
+# - Best for compute-heavy functions (fibonacci, image processing, crypto)
+```
+
 **Quality Analysis**:
 ```bash
 # Technical debt analysis
