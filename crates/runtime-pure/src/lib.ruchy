@@ -11,9 +11,7 @@
 /// - POST /2018-06-01/runtime/invocation/{id}/response
 pub struct Runtime {
     api_endpoint: String,
-}
 
-impl Runtime {
     /// Create new Runtime from default endpoint
     pub fun new() -> Runtime {
         let endpoint = String::from("127.0.0.1:9001");

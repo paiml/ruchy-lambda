@@ -2,12 +2,13 @@
 members = [
     "crates/bootstrap",
     "crates/runtime",
-    "crates/profiler", "crates/runtime-pure",
+    "crates/profiler",
+    # "crates/runtime-pure",  # Disabled: Requires top-level impl blocks (not supported in Ruchy v3.212.0)
 ]
 resolver = "2"
 
 [workspace.package]
-version = "3.209.0"
+version = "3.212.0"
 edition = "2021"
 authors = ["Ruchy Lambda Contributors"]
 license = "MIT OR Apache-2.0"

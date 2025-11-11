@@ -67,7 +67,13 @@ impl MockLambdaServer {
     }
 
     /// Run mock server that captures post_response requests
-    fn run_post_response_server(self) -> (Arc<AtomicUsize>, Arc<AtomicBool>, Arc<Mutex<Option<String>>>) {
+    fn run_post_response_server(
+        self,
+    ) -> (
+        Arc<AtomicUsize>,
+        Arc<AtomicBool>,
+        Arc<Mutex<Option<String>>>,
+    ) {
         let request_count = self.request_count.clone();
         let response_sent = self.response_sent.clone();
         let last_body = self.last_request_body.clone();
