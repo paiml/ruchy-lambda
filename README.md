@@ -1,6 +1,6 @@
 # Ruchy Lambda
 
-AWS Lambda custom runtime using Ruchy (transpiled to Rust) with measured cold start performance of **9.19ms average, 8.14ms best** (v3.209.0 with release-ultra optimizations).
+AWS Lambda custom runtime using Ruchy (transpiled to Rust) with measured cold start performance of **9.48ms average, 7.69ms best** (v3.212.0 with release-ultra optimizations).
 
 ## Performance (Measured on AWS Lambda)
 
@@ -10,7 +10,7 @@ All data captured from AWS CloudWatch logs on deployed functions in us-east-1.
 
 | Runtime | Init Duration | Binary Size | Runtime Loaded | Memory Used | Status |
 |---------|---------------|-------------|----------------|-------------|--------|
-| **Ruchy v3.209.0** | **9.19ms** (8.14ms best) | **352KB** | **352KB** | **14MB** | ✅ **Production** |
+| **Ruchy v3.212.0** | **9.48ms** (7.69ms best) | **352KB** | **352KB** | **14MB** | ✅ **Production** |
 | Rust (tokio) | 14.90ms | 596KB | 596KB | 12MB | Baseline |
 | C++ (AWS SDK) | 28.96ms | 87KB | 87KB | 22MB | - |
 | Go | 56.49ms | 4.2MB | 4.2MB | 19MB | - |
@@ -24,7 +24,7 @@ All data captured from AWS CloudWatch logs on deployed functions in us-east-1.
 
 | Runtime | Init | Execution | Total |
 |---------|------|-----------|-------|
-| **Ruchy v3.209.0** | **9.19ms** | **644.74ms** | **653.93ms** |
+| **Ruchy v3.212.0** | **9.26ms** | **637.46ms** | **646.72ms** |
 | Rust | 14.97ms | 551.33ms | 566.30ms |
 | Go | 46.85ms | 689.22ms | 736.07ms |
 | C++ | 99.38ms | 1136.72ms | 1236.10ms |

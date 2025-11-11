@@ -12,14 +12,12 @@ pub fn main() {
                 {
                     println!("[BOOTSTRAP] Waiting for next event...");
                     let (request_id, event_body) = runtime.next_event();
-                    println!("[BOOTSTRAP] Processing request: {}", & request_id);
+                    println!("[BOOTSTRAP] Processing request: {}", &request_id);
                     {
                         let response = lambda_handler(&request_id, &event_body);
                         {
                             runtime.post_response(&request_id, &response);
-                            println!(
-                                "[BOOTSTRAP] Response sent for request: {}", & request_id
-                            )
+                            println!("[BOOTSTRAP] Response sent for request: {}", &request_id)
                         }
                     }
                 }

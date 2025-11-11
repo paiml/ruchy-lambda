@@ -87,7 +87,10 @@ fn transpile_ruchy_file(input: &str, output: &str) {
 
     // Fix module path separator: http_client.method() -> http_client::method()
     transpiled = transpiled.replace("http_client.http_get(", "http_client::http_get(");
-    transpiled = transpiled.replace("http_client\n                        .http_post(", "http_client::http_post(");
+    transpiled = transpiled.replace(
+        "http_client\n                        .http_post(",
+        "http_client::http_post(",
+    );
 
     // Fix method signatures: `self` -> `&self` for borrowing
     transpiled = transpiled.replace("fn next_event(self)", "fn next_event(&self)");
@@ -96,12 +99,6 @@ fn transpile_ruchy_file(input: &str, output: &str) {
     transpiled = transpiled.replace("fn http_post(self,", "fn http_post(&self,");
     transpiled = transpiled.replace("fn parse_response(self,", "fn parse_response(&self,");
     transpiled = transpiled.replace("fn endpoint(self)", "fn endpoint(&self)");
-
-    // Make methods public
-    transpiled = transpiled.replace("fn new()", "pub fn new()");
-    transpiled = transpiled.replace("fn next_event(", "pub fn next_event(");
-    transpiled = transpiled.replace("fn post_response(", "pub fn post_response(");
-    transpiled = transpiled.replace("fn endpoint(", "pub fn endpoint(");
 
     // Remove main() function (not needed for library)
     transpiled = transpiled.replace("fn main() {}", "");
