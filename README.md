@@ -53,6 +53,21 @@ Measured with hyperfine v1.18.0, fibonacci(35) benchmark (10+ runs, 2 warmup):
 
 **Runtime size matters for Lambda**: Smaller binaries load faster. Python loads a 78MB interpreter (85.73ms init), Julia has 200MB+ runtime making it impractical for serverless.
 
+### PGO Analysis (Profile-Guided Optimization)
+
+Tested Ruchy v3.212.0's `--pgo` flag on fibonacci(35) workload:
+
+| Optimization | Time | Binary Size | Result |
+|--------------|------|-------------|--------|
+| nasa/aggressive | 20.7ms | 312-314KB | ✅ Optimal |
+| **PGO** | **22.0ms** | **3.8MB** | ❌ **6% slower, 12x larger** |
+
+**Why PGO Failed**: Fibonacci has simple branching (single if/else) that branch predictors handle well. PGO's aggressive inlining creates code bloat, hurting cache locality.
+
+**When PGO Works**: Complex branching patterns (JSON parsing, HTTP routing, hash tables, trees) where hot path optimization justifies the binary size trade-off.
+
+**Recommendation**: **Do not use PGO for Lambda**. Stick with `opt-level='z'` (release-ultra) for optimal cold start performance.
+
 ## Architecture
 
 ```
@@ -82,6 +97,8 @@ ruchy compile your-handler.ruchy --optimize nasa --show-profile-info
 
 # Profile-Guided Optimization for CPU-intensive workloads (v3.212.0+)
 ruchy compile your-handler.ruchy --pgo  # Automated 2-step PGO build
+# Note: PGO is workload-dependent. Fibonacci(35) shows NO benefit (6% slower, 12x larger binary).
+#       Best for: complex branching, hash tables, JSON parsing, HTTP routing.
 
 # Run tests
 cargo test --workspace
