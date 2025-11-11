@@ -36,10 +36,14 @@ Ruchy Lambda is the **world's fastest custom AWS Lambda runtime**, combining the
 - **Package Size**: 174-175KB (zipped)
 
 **Comparison vs Other Runtimes**:
-- **48% faster** than Rust (tokio): 14.90ms
-- **73% faster** than C++ (AWS SDK): 28.96ms
-- **83% faster** than Go: 56.49ms
-- **91% faster** than Python 3.12: 85.73ms
+
+| Runtime | Cold Start | Duration (CPU) | Memory | Binary Size |
+|---------|-----------|----------------|--------|-------------|
+| **Ruchy v3.212.0** | **7.69ms** | **1.47ms** | **14MB** | **352KB** |
+| Rust (tokio) | 14.90ms (+94%) | 1.09ms | 12MB | 596KB |
+| C++ (AWS SDK) | 28.96ms (+277%) | 4.04ms | 22MB | 87KB |
+| Go | 56.49ms (+635%) | 2.34ms | 19MB | 4.2MB |
+| Python 3.12 | 85.73ms (+1,015%) | 15.07ms | 36MB | 445B + 78MB* |
 
 ### Key Components
 
