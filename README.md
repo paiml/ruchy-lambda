@@ -32,22 +32,24 @@ All data captured from AWS CloudWatch logs on deployed functions in us-east-1.
 
 ### Local Benchmark (Pure Execution)
 
-Measured with bashrs bench v6.31.1, fibonacci(35) benchmark:
+Measured with hyperfine v1.18.0, fibonacci(35) benchmark (10+ runs, 2 warmup):
 
-| Runtime | Mean Time | vs Python | Binary Size |
-|---------|-----------|-----------|-------------|
-| C (gcc -O3) | 11.86ms | 58.1x faster | 15KB |
-| **Ruchy compile (nasa)** | **18.22ms** | **37.8x faster** | **321KB** |
-| Ruchy compile (aggressive) | 18.59ms | 37.1x faster | 319KB |
-| Rust (opt-level=3) | 21.89ms | 31.5x faster | 312KB |
-| Ruchy compile (balanced) | 23.52ms | 29.3x faster | 1.9MB |
-| Go | 37.59ms | 18.3x faster | ~1.5MB |
-| Julia (JIT) | 182.72ms | 3.8x faster | ~200MB |
-| Python | 688.89ms | baseline | ~78MB |
+| Runtime | Mean Time | Std Dev | Binary Size |
+|---------|-----------|---------|-------------|
+| **Ruchy v3.212.0 (nasa)** | **20.7ms** | **± 0.6ms** | **321KB** |
+| **Ruchy v3.212.0 (aggressive)** | **20.8ms** | **± 0.5ms** | **319KB** |
+
+**Optimization Profile Analysis** (Ruchy v3.212.0 `--show-profile-info`):
+- **nasa**: opt-level=3, LTO=fat, target-cpu=native → 321KB, 20.7ms
+- **aggressive**: opt-level=3, LTO=fat → 319KB, 20.8ms
+- **Result**: NASA and aggressive perform identically (within measurement error)
+
+**Lambda Deployment Profile** (release-ultra in Cargo.toml):
+- **opt-level='z'** (size optimization, not speed)
+- **Rationale**: Smaller binary = faster cold start (352KB vs 2.1MB with opt-level=3)
+- **Trade-off**: 6x smaller binary, slightly slower execution (acceptable for Lambda)
 
 **Note**: Local benchmarks measure pure execution (fibonacci only). AWS Lambda cold start includes additional overhead from HTTP client, event loop, JSON deserialization (~520-650ms), which dominates the total time.
-
-**Key Finding**: Ruchy compile (nasa/aggressive) is **16.8% faster** than plain Rust due to two-stage optimization (Ruchy AST → rustc).
 
 **Runtime size matters for Lambda**: Smaller binaries load faster. Python loads a 78MB interpreter (85.73ms init), Julia has 200MB+ runtime making it impractical for serverless.
 
@@ -72,7 +74,14 @@ cargo build --profile release-ultra -p ruchy-lambda-bootstrap
 ./scripts/build-lambda-package.sh minimal  # Uses release-ultra profile
 
 # Or compile Ruchy directly (for standalone programs)
-ruchy compile your-handler.ruchy --optimize aggressive  # 312KB binary
+ruchy compile your-handler.ruchy --optimize aggressive  # 319KB binary
+ruchy compile your-handler.ruchy --optimize nasa        # 321KB, native CPU
+
+# Show profile characteristics before compiling (Ruchy v3.212.0+)
+ruchy compile your-handler.ruchy --optimize nasa --show-profile-info
+
+# Profile-Guided Optimization for CPU-intensive workloads (v3.212.0+)
+ruchy compile your-handler.ruchy --pgo  # Automated 2-step PGO build
 
 # Run tests
 cargo test --workspace
@@ -82,7 +91,7 @@ make bench-local
 
 # Deploy to AWS Lambda
 ./scripts/build-lambda-package.sh minimal
-./scripts/deploy-to-aws.sh my-function-name
+./scripts/deploy-to-aws.sh
 ```
 
 ## Handler Example
