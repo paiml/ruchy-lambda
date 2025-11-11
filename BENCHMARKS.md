@@ -20,15 +20,17 @@ Ruchy Lambda achieves **world-class performance** with **7.69ms best cold start,
 | **Reliability** | 100% | **100%** | ✅ PASS (10+ invocations) |
 | **Test Coverage** | ≥85% | **85%+** | ✅ PASS |
 
-### Performance Comparison
+### Performance Comparison (All Metrics)
 
-| Runtime | Cold Start | vs Ruchy | Binary Size |
-|---------|-----------|----------|-------------|
-| **Ruchy v3.212.0** | **7.69ms** | **Baseline** | 352KB |
-| Rust (tokio) | 14.90ms | **+94%** slower | 596KB |
-| C++ (AWS SDK) | 28.96ms | **+277%** slower | 87KB |
-| Go | 56.49ms | **+635%** slower | 4.2MB |
-| Python 3.12 | 85.73ms | **+1,015%** slower | 445B + 78MB runtime |
+| Runtime | Cold Start | Duration (CPU) | Memory | Binary Size | vs Ruchy |
+|---------|-----------|----------------|--------|-------------|----------|
+| **Ruchy v3.212.0** | **7.69ms** | **1.47ms** | **14MB** | **352KB** | **Baseline** |
+| Rust (tokio) | 14.90ms | 1.09ms | 12MB | 596KB | **+94%** slower |
+| C++ (AWS SDK) | 28.96ms | 4.04ms | 22MB | 87KB | **+277%** slower |
+| Go | 56.49ms | 2.34ms | 19MB | 4.2MB | **+635%** slower |
+| Python 3.12 | 85.73ms | 15.07ms | 36MB | 445B + 78MB* | **+1,015%** slower |
+
+**All measurements from AWS Lambda CloudWatch logs** (Init Duration, Duration, Max Memory Used, binary sizes verified locally).
 
 ---
 
