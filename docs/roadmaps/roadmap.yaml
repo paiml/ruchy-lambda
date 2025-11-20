@@ -6,11 +6,11 @@ roadmap:
   github_issue: null
   item_type: task
   title: 'New task: arm-simd-lambda'
-  status: inprogress
+  status: completed
   priority: medium
   assigned_to: null
   created: 2025-11-20T14:49:53.845448357+00:00
-  updated: 2025-11-20T14:49:53.845448357+00:00
+  updated: 2025-11-20T15:02:30.391920799+00:00
   spec: null
   acceptance_criteria: []
   phases: []
