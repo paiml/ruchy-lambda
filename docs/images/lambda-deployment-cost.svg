@@ -1,0 +1,91 @@
+<svg width="900" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="450" y="30" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+    Lambda Deployment: Binary Size vs Cold Start Time
+  </text>
+
+  <text x="450" y="55" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7f8c8d">
+    AWS Lambda us-east-1 • Measured Init Duration from CloudWatch Logs
+  </text>
+
+  <!-- Chart Area -->
+  <g transform="translate(100, 100)">
+
+    <!-- Y-axis: Cold Start (ms) -->
+    <line x1="0" y1="0" x2="0" y2="400" stroke="#34495e" stroke-width="2"/>
+    <text x="-15" y="-10" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#34495e">Cold Start (ms)</text>
+
+    <!-- Y-axis labels -->
+    <text x="-10" y="405" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#34495e">0</text>
+    <text x="-10" y="305" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#34495e">20</text>
+    <text x="-10" y="205" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#34495e">40</text>
+    <text x="-10" y="105" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#34495e">60</text>
+    <text x="-10" y="5" font-family="Arial, sans-serif" font-size="11" text-anchor="end" fill="#34495e">80</text>
+
+    <!-- Horizontal grid lines -->
+    <line x1="0" y1="305" x2="700" y2="305" stroke="#ecf0f1" stroke-width="1"/>
+    <line x1="0" y1="205" x2="700" y2="205" stroke="#ecf0f1" stroke-width="1"/>
+    <line x1="0" y1="105" x2="700" y2="105" stroke="#ecf0f1" stroke-width="1"/>
+
+    <!-- X-axis -->
+    <line x1="0" y1="400" x2="700" y2="400" stroke="#34495e" stroke-width="2"/>
+
+    <!-- Bar 1: Ruchy Lambda ARM64 SIMD (6.70ms, 396KB) - GREEN -->
+    <rect x="50" y="367" width="100" height="33" fill="#27ae60" opacity="0.9"/>
+    <text x="100" y="355" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#27ae60">6.70ms</text>
+    <text x="100" y="340" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#27ae60">396KB</text>
+    <text x="100" y="425" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">Ruchy Lambda</text>
+    <text x="100" y="440" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">(ARM64 SIMD)</text>
+
+    <!-- Bar 2: x86_64 baseline (9.48ms, 352KB) - BLUE -->
+    <rect x="180" y="362" width="100" height="38" fill="#3498db" opacity="0.8"/>
+    <text x="230" y="350" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2980b9">9.48ms</text>
+    <text x="230" y="335" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#2980b9">352KB</text>
+    <text x="230" y="425" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">x86_64</text>
+    <text x="230" y="440" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">(baseline)</text>
+
+    <!-- Bar 3: Rust tokio (14.90ms, ~2MB) - PURPLE -->
+    <rect x="310" y="341" width="100" height="59" fill="#9b59b6" opacity="0.8"/>
+    <text x="360" y="328" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#8e44ad">14.90ms</text>
+    <text x="360" y="313" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#8e44ad">~2MB</text>
+    <text x="360" y="425" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">Rust</text>
+    <text x="360" y="440" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">(tokio)</text>
+
+    <!-- Bar 4: C++ AWS SDK (28.96ms, ~10MB) - ORANGE -->
+    <rect x="440" y="257" width="100" height="143" fill="#e67e22" opacity="0.8"/>
+    <text x="490" y="242" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#d35400">28.96ms</text>
+    <text x="490" y="227" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#d35400">~10MB</text>
+    <text x="490" y="425" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">C++</text>
+    <text x="490" y="440" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">(AWS SDK)</text>
+
+    <!-- Bar 5: Python 3.12 (85.73ms, ~100MB) - RED -->
+    <rect x="570" y="0" width="100" height="400" fill="#e74c3c" opacity="0.8"/>
+    <text x="620" y="-15" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#c0392b">85.73ms</text>
+    <text x="620" y="-30" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#c0392b">~100MB</text>
+    <text x="620" y="425" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">Python 3.12</text>
+    <text x="620" y="440" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">(NumPy/libs)</text>
+  </g>
+
+  <!-- Key Insight Box -->
+  <g transform="translate(100, 480)">
+    <rect x="0" y="0" width="700" height="90" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1" rx="5"/>
+
+    <text x="350" y="25" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#2c3e50">
+      Key Finding: Binary Size Directly Impacts Cold Start
+    </text>
+
+    <g transform="translate(20, 35)">
+      <circle cx="5" cy="5" r="4" fill="#27ae60"/>
+      <text x="15" y="9" font-family="Arial, sans-serif" font-size="11" fill="#2c3e50">
+        <tspan font-weight="bold">Ruchy Lambda (ARM SIMD):</tspan> 396KB → 6.70ms cold start (12.8x faster than Python)
+      </text>
+    </g>
+
+    <g transform="translate(20, 55)">
+      <circle cx="5" cy="5" r="4" fill="#e74c3c"/>
+      <text x="15" y="9" font-family="Arial, sans-serif" font-size="11" fill="#2c3e50">
+        <tspan font-weight="bold">Python (wrapped in C++):</tspan> ~100MB runtime → 85.73ms cold start (huge overhead)
+      </text>
+    </g>
+  </g>
+</svg>
