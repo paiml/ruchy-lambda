@@ -10,6 +10,16 @@
   <img src="docs/images/cold-start-comparison.svg" alt="Lambda Cold Start Performance Comparison" width="100%">
 </div>
 
+## 🤥 The Lambda Lie: "Just Wrap Python in C++"
+
+<div align="center">
+  <img src="docs/images/python-c-lambda-lie.png" alt="The Lambda Lie: Wrapping Python in C++ makes serverless WORSE" width="100%">
+</div>
+
+**The Truth**: Each "optimization" layer makes Lambda deployment **WORSE**. Python wrapped in C++ gives you fast local compute but **HUGE** binaries (10-50MB) and **MASSIVE** cold starts (28-86ms). Ruchy Lambda gives you **BOTH**: ARM SIMD performance (4x parallelism) **AND** world-class cold start (6.70ms, 396KB binary). No wrapping needed — just pure Rust compiled for Graviton2.
+
+---
+
 **Ruchy Lambda** achieves **6.70ms cold start** on AWS Graviton2 using hand-tuned ARM NEON SIMD intrinsics — **29% faster than x86_64 baseline** and **12.8x faster than Python**.
 
 Built by transpiling Ruchy (high-level language) to Rust with aggressive size optimizations:
