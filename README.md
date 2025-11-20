@@ -433,11 +433,11 @@ Tested Ruchy v3.212.0's `--pgo` flag on fibonacci(35) workload:
 
 ## Related Projects
 
-**Ruchy Ecosystem** (sibling directories):
-- **[../ruchy](../ruchy)** - Main Ruchy compiler (v3.212.0+, 4,383 tests)
-- **[../ruchy-book](../ruchy-book)** - Documentation (100% working examples)
-- **[../ruchyruchy](../ruchyruchy)** - JIT compiler + debugging tools
-- **[../paiml-mcp-agent-toolkit](../paiml-mcp-agent-toolkit)** - PMAT quality enforcement
+**Ruchy Ecosystem**:
+- **[ruchy](https://github.com/paiml/ruchy)** - Main Ruchy compiler (v3.212.0+, 4,383 tests)
+- **[ruchy-book](https://github.com/paiml/ruchy-book)** - Documentation (100% working examples)
+- **[ruchyruchy](https://github.com/paiml/ruchyruchy)** - JIT compiler + debugging tools
+- **[paiml-mcp-agent-toolkit](https://github.com/paiml/paiml-mcp-agent-toolkit)** - PMAT quality enforcement
 
 ## Contributing
 
