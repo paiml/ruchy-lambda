@@ -72,6 +72,11 @@ fn main() {
         println!("cargo:rerun-if-changed=src/handler_fibonacci.ruchy");
     }
 
+    // Note: handler_simd_vector.rs is pure Rust (not transpiled)
+    // ARM NEON intrinsics require direct Rust implementation
+    println!("cargo:rerun-if-changed=src/handler_simd_vector.rs");
+    println!("cargo:rerun-if-changed=src/simd_ops.rs");
+
     println!("cargo:warning=Ruchy transpilation complete");
 }
 
