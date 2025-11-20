@@ -265,9 +265,9 @@ TOTAL               ~400KB   100%
 
 ## Comparison vs Baselines
 
-### lambda-perf Benchmark Suite
+### Benchmark Methodology
 
-We use the [lambda-perf](https://github.com/serverless-benchmark/lambda-perf) methodology for fair comparison:
+We use industry-standard Lambda benchmarking methodology for fair comparison:
 
 **Minimal Handler** (pure runtime overhead):
 ```
@@ -497,7 +497,6 @@ Ruchy Lambda achieves **world-class performance**:
 
 ## References
 
-- [lambda-perf Benchmark Suite](https://github.com/serverless-benchmark/lambda-perf)
 - [AWS Lambda Performance Best Practices](https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html)
 - [Architecture Guide](ARCHITECTURE.md)
 - [Development Roadmap](docs/execution/roadmap.md)

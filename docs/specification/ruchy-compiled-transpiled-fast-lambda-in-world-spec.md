@@ -1426,10 +1426,10 @@ fun handler(event, context):
    - Key finding: Cold starts increase latency 5-6x vs. warm starts
 
 #### ARM64 vs. x86 Performance
-4. **Lambion, D. et al.** (2022). "Characterizing X86 and ARM Serverless Performance Variation: A Natural Language Processing Case Study." *Companion of the 2022 ACM/SPEC International Conference on Performance Engineering*. [Open Access](https://faculty.washington.edu/wlloyd/courses/tcss562/papers/wosc10-fa22-x86-vs-arm-nlp.pdf)
+4. **Lambion, D. et al.** (2022). "Characterizing X86 and ARM Serverless Performance Variation: A Natural Language Processing Case Study." *Companion of the 2022 ACM/SPEC International Conference on Performance Engineering*. DOI: 10.1145/3489525.3511691
    - Key finding: ARM64 exhibits <50% runtime variance compared to x86
 
-5. **Chen, X. et al.** (2023). "X86 vs. ARM: An Investigation of Factors Influencing Serverless Performance." *Proceedings of the 10th IEEE International Conference on Cloud Engineering Technology*. [Open Access](https://faculty.washington.edu/wlloyd/courses/tcss562/papers/wosc10-fa22-x86-vs-arm-overview.pdf)
+5. **Chen, X. et al.** (2023). "X86 vs. ARM: An Investigation of Factors Influencing Serverless Performance." *Proceedings of the 10th IEEE International Conference on Cloud Engineering Technology*.
    - Key finding: 15 of 18 benchmarks more cost-effective on ARM
 
 #### Technical Debt and Complexity

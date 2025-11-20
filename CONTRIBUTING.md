@@ -395,7 +395,6 @@ Your contributions must be your own work and you must have the right to submit t
 
 - **Issues**: https://github.com/paiml/ruchy-lambda/issues
 - **Discussions**: https://github.com/paiml/ruchy-lambda/discussions
-- **Slack**: [Join our community](https://ruchy-lang.slack.com)
 
 Thank you for contributing to Ruchy Lambda!
 
