@@ -2,10 +2,14 @@
 # Target-specific compilation settings for ARM64 Graviton2
 
 [target.aarch64-unknown-linux-musl]
+linker = "aarch64-linux-gnu-gcc"
 rustflags = [
-    "-C", "target-cpu=neoverse-n1",  # Graviton2 CPU optimization
-    "-C", "link-arg=-static",        # Static linking
-    "-C", "link-arg=-s",             # Strip symbols
+    "-C", "target-cpu=neoverse-n1",      # Graviton2 CPU (enables NEON by default)
+    "-C", "target-feature=+neon",        # Explicit NEON SIMD support
+    "-C", "link-arg=-static",            # Static linking
+    "-C", "link-arg=-s",                 # Strip symbols
+    # Additional optimizations for ARM64 Lambda
+    "-C", "llvm-args=-aarch64-enable-sink-fold=true",  # ARM-specific optimizations
 ]
 
 [target.x86_64-unknown-linux-musl]
