@@ -40,3 +40,4 @@ baselines/*/Dockerfile
 baselines/go/go.sum
 baselines/rust/target/
 baselines/cpp/*.o
+.cargo/config.toml
