@@ -2,7 +2,7 @@
 // Zero external dependencies - uses std::arch::aarch64 intrinsics
 // Target: 5x faster than scalar on ARM64, <500KB binary
 
-#![allow(clippy::missing_safety_doc)]
+#![allow(clippy::missing_safety_doc, dead_code, clippy::doc_markdown, clippy::cast_precision_loss)]
 
 /// SIMD-optimized dot product for f32 vectors
 ///
