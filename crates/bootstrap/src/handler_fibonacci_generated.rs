@@ -1,8 +1,10 @@
-#![allow(unused_variables, dead_code, clippy::all)]
-
 #[allow(clippy::all)]
 pub fn fibonacci(n: i32) -> i32 {
-    if n <= 1 { n } else { fibonacci(n - 1) + fibonacci(n - 2) }
+    if n <= 1 {
+        n
+    } else {
+        fibonacci(n - 1) + fibonacci(n - 2)
+    }
 }
 #[allow(clippy::all)]
 pub fn lambda_handler(request_id: &str, body: &str) -> String {
@@ -15,14 +17,15 @@ pub fn lambda_handler(request_id: &str, body: &str) -> String {
                 {
                     let response = format!(
                         "{}{}",
-                        String::from("{\"statusCode\":200,\"body\":\"fibonacci(35)=") + &
-                        result_str, "\"}"
+                        String::from("{\"statusCode\":200,\"body\":\"fibonacci(35)=".to_string())
+                            + &result_str,
+                        "\"}"
                     );
                     response
                 }
             }
         })
-            .to_string()
+        .to_string()
     }
 }
 #[allow(dead_code)]
