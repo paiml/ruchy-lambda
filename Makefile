@@ -1,4 +1,4 @@
-.PHONY: help test coverage coverage-open lint format clean quality build validate-ruchy-examples ruchy-score ruchy-coverage bench-local
+.PHONY: help test test-fast coverage coverage-open lint format clean quality build validate-ruchy-examples ruchy-score ruchy-coverage bench-local
 
 help:
 	@echo "Ruchy Lambda - Development Commands"
@@ -35,6 +35,12 @@ test: validate-ruchy-examples
 	@echo "Running test suite..."
 	@cargo test --workspace --lib
 	@echo "✓ Tests complete"
+
+# Fast test target for CI and quick iteration (<30s, optimized with --lib)
+test-fast:
+	@echo "Running fast tests..."
+	@cargo test --workspace --lib
+	@echo "✓ Fast tests complete"
 
 # Validate all .ruchy files with ruchy tools (ZERO tolerance for invalid syntax)
 validate-ruchy-examples:

@@ -1,4 +1,6 @@
-# Ruchy Lambda ⚡
+<div align="center">
+
+# Ruchy Lambda
 
 > **World's Fastest AWS Lambda Runtime with ARM SIMD**
 
@@ -6,9 +8,24 @@
 [![Binary Size](https://img.shields.io/badge/Binary-396KB-blue)](target/aarch64-unknown-linux-musl/release-ultra/bootstrap)
 [![Architecture](https://img.shields.io/badge/ARM64-Graviton2-orange)](https://aws.amazon.com/ec2/graviton/)
 
-<div align="center">
+<p align="center">
   <img src="docs/images/cold-start-comparison.svg" alt="Lambda Cold Start Performance Comparison" width="100%">
+</p>
+
 </div>
+
+## Table of Contents
+
+- [Overview](#binary-size-vs-cold-start-performance)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Performance](#performance-vs-industry-baselines)
+- [Architecture](#architecture)
+- [ARM64 SIMD Implementation](#arm64-simd-implementation)
+- [Build Profiles](#build-profiles)
+- [Deployment Guide](#deployment-guide)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Binary Size vs Cold Start Performance
 
@@ -27,6 +44,19 @@ Built by transpiling Ruchy (high-level language) to Rust with aggressive size op
 - **396KB binary** with SIMD support (21% under 500KB target)
 - **Zero external dependencies** (pure `std::arch::aarch64`)
 - **20% cost savings** on Graviton2 vs x86_64
+
+## Installation
+
+```bash
+# Prerequisites: ARM64 cross-compilation toolchain
+rustup target add aarch64-unknown-linux-musl
+sudo apt-get install gcc-aarch64-linux-gnu
+
+# Clone and build
+git clone https://github.com/paiml/ruchy-lambda.git
+cd ruchy-lambda
+cargo build --release
+```
 
 ## Quick Start
 

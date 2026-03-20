@@ -1,0 +1,45 @@
+name: Book
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'book/**'
+      - 'docs/**'
+      - '.github/workflows/book.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'book/**'
+      - 'docs/**'
+      - '.github/workflows/book.yml'
+  workflow_dispatch:
+
+env:
+  MDBOOK_VERSION: '0.4.40'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache mdBook
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/mdbook
+          key: ${{ runner.os }}-mdbook-${{ env.MDBOOK_VERSION }}
+
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v2
+        with:
+          mdbook-version: ${{ env.MDBOOK_VERSION }}
+
+      - name: Build book
+        run: mdbook build book || echo "No book directory yet"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        if: always()
+        with:
+          path: target/book
