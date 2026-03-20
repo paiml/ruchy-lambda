@@ -35,11 +35,22 @@ jobs:
         with:
           mdbook-version: ${{ env.MDBOOK_VERSION }}
 
+      - name: Check book directory
+        id: check-book
+        run: |
+          if [ -d "book/src" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "No book/src directory — skipping build"
+          fi
+
       - name: Build book
-        run: mdbook build book || echo "No book directory yet"
+        if: steps.check-book.outputs.exists == 'true'
+        run: mdbook build book
 
       - name: Upload artifact
+        if: steps.check-book.outputs.exists == 'true'
         uses: actions/upload-pages-artifact@v3
-        if: always()
         with:
           path: target/book
