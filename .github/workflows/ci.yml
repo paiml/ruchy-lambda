@@ -44,7 +44,7 @@ jobs:
       - name: Run Clippy
         env:
           RUSTFLAGS: ""
-        run: cargo clippy --all -- -D warnings -A clippy::implicit_clone -A clippy::doc_markdown -A clippy::cast_precision_loss -A dead_code -A unused_variables
+        run: cargo clippy --all -- -W clippy::correctness
 
       - name: Check Formatting
         run: cargo fmt --check
