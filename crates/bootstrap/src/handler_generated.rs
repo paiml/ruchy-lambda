@@ -15,8 +15,8 @@ pub fn lambda_handler(request_id: &str, body: &str) -> String {
                 );
                 {
                     let response = format!(
-                        "{}{}", String::from("{\"statusCode\":200,\"body\":\"") + &
-                        response_body, "\"}"
+                        "{}{}", String::from("{\"statusCode\":200,\"body\":\""
+                        .to_string()) + & response_body, "\"}"
                     );
                     response
                 }
