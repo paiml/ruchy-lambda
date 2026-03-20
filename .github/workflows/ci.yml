@@ -42,6 +42,8 @@ jobs:
           pmat tdg check-regression --baseline .pmat/tdg-baseline.json || echo "TDG baseline check skipped"
 
       - name: Run Clippy
+        env:
+          RUSTFLAGS: ""
         run: cargo clippy --all -- -D warnings -A clippy::implicit_clone -A clippy::doc_markdown -A clippy::cast_precision_loss -A dead_code -A unused_variables
 
       - name: Check Formatting
