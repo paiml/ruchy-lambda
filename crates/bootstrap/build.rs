@@ -1,4 +1,4 @@
-// build.rs - Automated Ruchy → Rust transpilation
+// build.rs - Automated Ruchy -> Rust transpilation
 // Integrates Ruchy transpiler into Cargo build process
 //
 // This runs during `cargo build` BEFORE compiling Rust code
@@ -15,18 +15,26 @@ fn main() {
     let ruchy_path = "../../../ruchy/target/debug/ruchy";
 
     // Check if ruchy exists, if not try cargo run
+    let ruchy_manifest = Path::new("../../../ruchy/Cargo.toml");
     let ruchy_exists = Path::new(ruchy_path).exists();
 
     if !ruchy_exists {
+        if !ruchy_manifest.exists() {
+            println!("cargo:warning=Ruchy compiler not found (no sibling checkout) — skipping transpilation");
+            return;
+        }
         println!("cargo:warning=Building Ruchy transpiler first...");
         // Build ruchy if not built
         let status = Command::new("cargo")
             .args(["build", "--manifest-path", "../../../ruchy/Cargo.toml"])
-            .status()
-            .expect("Failed to build Ruchy");
+            .status();
 
-        if !status.success() {
-            panic!("Failed to build Ruchy transpiler");
+        match status {
+            Ok(s) if s.success() => {}
+            _ => {
+                println!("cargo:warning=Failed to build Ruchy transpiler — skipping transpilation");
+                return;
+            }
         }
     }
 
@@ -104,5 +112,5 @@ fn transpile_file(input: &Path, output: &Path, ruchy_path: &str) {
 
     std::fs::write(output, transpiled.as_bytes()).expect("Failed to write transpiled output");
 
-    println!("cargo:warning=  ✅ Transpiled {:?} -> {:?}", input, output);
+    println!("cargo:warning=  Transpiled {:?} -> {:?}", input, output);
 }
