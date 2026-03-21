@@ -1,4 +1,5 @@
 <div align="center">
+[![CI](https://github.com/paiml/ruchy-lambda/actions/workflows/ci.yml/badge.svg)](https://github.com/paiml/ruchy-lambda/actions/workflows/ci.yml)
 
 # Ruchy Lambda
 
