@@ -118,7 +118,7 @@ mod aws_validation_tests {
     #[ignore]
     fn test_cold_start_meets_target() {
         // Read latest AWS benchmark results
-        let benchmark_path = "benchmarks/reports/aws/minimal-*.json";
+        let _benchmark_path = "benchmarks/reports/aws/minimal-*.json";
 
         // This test expects the AWS benchmark to have been run
         // and results saved to benchmarks/reports/aws/
