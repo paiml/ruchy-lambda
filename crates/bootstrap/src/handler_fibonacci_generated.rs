@@ -7,7 +7,7 @@ pub fn fibonacci(n: i32) -> i32 {
     }
 }
 #[allow(clippy::all)]
-pub fn lambda_handler(request_id: &str, body: &str) -> String {
+pub fn lambda_handler(_request_id: &str, _body: &str) -> String {
     {
         let n = 35;
         ({

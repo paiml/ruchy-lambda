@@ -13,10 +13,12 @@ use std::io::Write;
 use std::sync::Mutex;
 
 /// Mock writer to capture log output for testing
+#[allow(dead_code)]
 struct MockWriter {
     buffer: Mutex<Vec<u8>>,
 }
 
+#[allow(dead_code)]
 impl MockWriter {
     fn new() -> Self {
         Self {

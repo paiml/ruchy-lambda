@@ -191,8 +191,11 @@ mod real_measurement_tests {
         // GREEN: Compare real Ruchy measurements vs real C++/Rust/Go
 
         // Real baselines from lambda-perf (2024-12-31):
+        #[allow(dead_code)]
         const REAL_CPP_MS: f64 = 13.539;
+        #[allow(dead_code)]
         const REAL_RUST_MS: f64 = 16.983;
+        #[allow(dead_code)]
         const REAL_GO_MS: f64 = 45.769;
 
         // TODO: After implementation:

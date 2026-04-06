@@ -17,7 +17,9 @@ use std::time::{Duration, Instant};
 
 /// Performance targets from specification
 const TARGET_AVG_COLD_START_MS: f64 = 8.0; // Stretch goal
+#[allow(dead_code)]
 const TARGET_P50_COLD_START_MS: f64 = 7.0;
+#[allow(dead_code)]
 const TARGET_P99_COLD_START_MS: f64 = 12.0;
 const TARGET_BINARY_SIZE_KB: u64 = 100;
 
@@ -37,6 +39,7 @@ struct ColdStartMetrics {
     /// Total cold start time (ms) - init + handler
     total_duration_ms: f64,
     /// Peak memory usage (KB)
+    #[allow(dead_code)]
     peak_memory_kb: u64,
     /// Binary size (KB)
     binary_size_kb: u64,

@@ -331,6 +331,7 @@ mod tests {
             }
         }
 
+        #[allow(dead_code)]
         fn get_output(&self) -> String {
             let buffer = self.buffer.lock().unwrap();
             String::from_utf8_lossy(&buffer).to_string()
