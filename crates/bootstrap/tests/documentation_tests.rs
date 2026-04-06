@@ -11,7 +11,7 @@
 // - No broken references
 
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 /// Get workspace root directory
 fn workspace_root() -> PathBuf {
@@ -268,8 +268,6 @@ fn test_contributing_guide_exists() {
 
 #[cfg(test)]
 mod example_compilation_tests {
-    use std::process::Command;
-
     /// Verify example handlers can be transpiled
     #[test]
     #[ignore] // Requires Ruchy transpiler

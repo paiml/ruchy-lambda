@@ -13,7 +13,6 @@
 // - Initialization phase breakdown
 
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
-use std::process::Command;
 use std::time::{Duration, Instant};
 
 /// Performance targets from specification
