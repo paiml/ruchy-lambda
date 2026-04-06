@@ -3,7 +3,7 @@
 //
 // Following Extreme TDD: Tests written FIRST, handler implementation follows
 
-use ruchy_lambda_runtime::{LambdaEvent, RequestContext, Runtime};
+use ruchy_lambda_runtime::{LambdaEvent, Runtime};
 use std::env;
 
 /// Test that handler.ruchy transpiles successfully
